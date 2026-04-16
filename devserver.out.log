@@ -1,0 +1,11 @@
+
+> my-v0-project@0.1.0 dev
+> next dev --port 3000
+
+   ▲ Next.js 16.0.10 (Turbopack)
+   - Local:         http://localhost:3000
+   - Network:       http://192.168.1.103:3000
+
+ ✓ Starting...
+Creating turbopack project { dir: 'C:\\Users\\user\\Desktop\\eli_porti', testMode: true }
+ ✓ Ready in 960ms
