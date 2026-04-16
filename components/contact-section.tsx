@@ -18,6 +18,7 @@ export function ContactSection() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState("")
 
   const socialLinks = [
     data.personal.github ? { href: data.personal.github, icon: Github, label: "GitHub" } : null,
@@ -30,16 +31,31 @@ export function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitError("")
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
 
-    setIsSubmitting(false)
-    setSubmitted(true)
-    setFormData({ name: "", email: "", message: "" })
+      const result = await response.json()
 
-    // Reset success message after 5 seconds
-    setTimeout(() => setSubmitted(false), 5000)
+      if (!response.ok) {
+        throw new Error(result.error || "Unable to send your message right now.")
+      }
+
+      setSubmitted(true)
+      setFormData({ name: "", email: "", message: "" })
+      setTimeout(() => setSubmitted(false), 5000)
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Something went wrong. Please try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -136,6 +152,10 @@ export function ContactSection() {
                       </>
                     )}
                   </Button>
+
+                  {submitError ? (
+                    <p className="text-sm text-red-500">{submitError}</p>
+                  ) : null}
                 </form>
               )}
             </div>

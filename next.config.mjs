@@ -6,8 +6,8 @@ const basePath = isStaticSubpathDeploy ? `/${repoName}` : ""
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
-  trailingSlash: true,
+  output: isStaticSubpathDeploy ? "export" : undefined,
+  trailingSlash: isStaticSubpathDeploy,
   basePath,
   assetPrefix: basePath,
   env: {
