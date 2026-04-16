@@ -122,7 +122,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
       stats: [
         { value: "4+", label: "Web Technologies" },
         { value: "5+", label: "Core Strengths" },
-        { value: "3", label: "Education Levels" },
+        { value: "2", label: "Education Levels" },
         { value: "2", label: "Languages" },
       ],
     },
@@ -171,26 +171,6 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
             "Completed upper secondary studies.",
             "Strengthened communication, teamwork, and leadership skills.",
             "Built a solid academic foundation for technology learning.",
-          ],
-        },
-        {
-          type: "education",
-          title: "Ordinary Level",
-          company: "ASPADE Ngororero",
-          period: "2016 - 2019",
-          description: [
-            "Developed discipline and adaptability through academic studies.",
-            "Gained confidence working independently and in teams.",
-          ],
-        },
-        {
-          type: "education",
-          title: "Primary Education",
-          company: "GS Karama",
-          period: "2010 - 2015",
-          description: [
-            "Established foundational learning skills and curiosity.",
-            "Began building the habits that support long-term growth.",
           ],
         },
       ],
@@ -292,7 +272,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
       stats: [
         { value: "4+", label: "Technologies Web" },
         { value: "5+", label: "Forces Principales" },
-        { value: "3", label: "Niveaux d'etudes" },
+        { value: "2", label: "Niveaux d'etudes" },
         { value: "2", label: "Langues" },
       ],
     },
@@ -341,26 +321,6 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
             "Fin des etudes secondaires avancees.",
             "Renforcement des competences en communication, travail d'equipe et leadership.",
             "Construction d'une base academique solide pour l'apprentissage technologique.",
-          ],
-        },
-        {
-          type: "education",
-          title: "Niveau ordinaire",
-          company: "ASPADE Ngororero",
-          period: "2016 - 2019",
-          description: [
-            "Developpement de la discipline et de l'adaptabilite grace aux etudes.",
-            "Confiance accrue dans le travail individuel et en equipe.",
-          ],
-        },
-        {
-          type: "education",
-          title: "Etudes primaires",
-          company: "GS Karama",
-          period: "2010 - 2015",
-          description: [
-            "Mise en place des bases d'apprentissage et de curiosite.",
-            "Debut des habitudes qui soutiennent une croissance durable.",
           ],
         },
       ],
@@ -463,7 +423,7 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
       stats: [
         { value: "4+", label: "Tekinoloji za Web" },
         { value: "5+", label: "Imbaraga z'ingenzi" },
-        { value: "3", label: "Ibyiciro by'amashuri" },
+        { value: "1", label: "Ibyiciro by'amashuri" },
         { value: "2", label: "Indimi" },
       ],
     },
@@ -490,26 +450,6 @@ export const portfolioContent: Record<Language, PortfolioContent> = {
             "Narangiye amashuri yisumbuye.",
             "Nongereye ubumenyi mu kuvugana, gukorera hamwe no kuyobora.",
             "Nubatse umusingi mwiza wo gukomeza kwiga ikoranabuhanga.",
-          ],
-        },
-        {
-          type: "education",
-          title: "O-Level",
-          company: "ASPADE Ngororero",
-          period: "2016 - 2019",
-          description: [
-            "Nateje imbere disipuline no kwihinduranya n'ibikenewe mu myigire.",
-            "Nabonye icyizere cyo gukora njyenyine no gukorana n'abandi.",
-          ],
-        },
-        {
-          type: "education",
-          title: "Amashuri abanza",
-          company: "GS Karama",
-          period: "2010 - 2015",
-          description: [
-            "Nashyizeho umusingi wo kwiga neza no kugira amatsiko.",
-            "Natangiye kubaka imico ifasha gukura mu gihe kirekire.",
           ],
         },
       ],
