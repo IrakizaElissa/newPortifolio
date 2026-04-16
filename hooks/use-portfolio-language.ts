@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useSyncExternalStore } from "react"
 import { portfolioContent, type Language } from "@/data/portfolio-content"
 
 const STORAGE_KEY = "portfolio-language"
@@ -9,32 +9,71 @@ function isLanguage(value: string | null): value is Language {
   return value === "en" || value === "fr" || value === "rw"
 }
 
-export function usePortfolioLanguage() {
-  const [language, setLanguage] = useState<Language>("en")
+function getBrowserLanguage(): Language {
+  if (typeof window === "undefined") {
+    return "en"
+  }
 
-  useEffect(() => {
-    const stored = window.localStorage.getItem(STORAGE_KEY)
-    if (isLanguage(stored)) {
-      setLanguage(stored)
-      return
-    }
+  const browserLanguage = window.navigator.language.toLowerCase()
+  if (browserLanguage.startsWith("fr")) {
+    return "fr"
+  }
+  if (browserLanguage.startsWith("rw")) {
+    return "rw"
+  }
 
-    const browserLanguage = window.navigator.language.toLowerCase()
-    if (browserLanguage.startsWith("fr")) {
-      setLanguage("fr")
-    } else if (browserLanguage.startsWith("rw")) {
-      setLanguage("rw")
-    }
-  }, [])
+  return "en"
+}
 
-  const updateLanguage = (value: Language) => {
-    setLanguage(value)
+let currentLanguage: Language = "en"
+const listeners = new Set<() => void>()
+
+function emitChange() {
+  listeners.forEach((listener) => listener())
+}
+
+function readStoredLanguage() {
+  if (typeof window === "undefined") {
+    return currentLanguage
+  }
+
+  const stored = window.localStorage.getItem(STORAGE_KEY)
+  return isLanguage(stored) ? stored : getBrowserLanguage()
+}
+
+function setGlobalLanguage(value: Language) {
+  currentLanguage = value
+
+  if (typeof window !== "undefined") {
     window.localStorage.setItem(STORAGE_KEY, value)
   }
 
+  emitChange()
+}
+
+function subscribe(listener: () => void) {
+  listeners.add(listener)
+  return () => listeners.delete(listener)
+}
+
+function getSnapshot() {
+  return currentLanguage
+}
+
+export function usePortfolioLanguage() {
+  const language = useSyncExternalStore(subscribe, getSnapshot, getSnapshot)
+
+  useEffect(() => {
+    const initialLanguage = readStoredLanguage()
+    if (initialLanguage !== currentLanguage) {
+      currentLanguage = initialLanguage
+      emitChange()
+    }
+  }, [])
+
   return {
     language,
-    setLanguage: updateLanguage,
+    setLanguage: setGlobalLanguage,
     content: portfolioContent[language],
   }
 }
