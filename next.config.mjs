@@ -1,5 +1,8 @@
 const repoName = "my_portifolio_-website"
-const basePath = process.env.NODE_ENV === "production" ? `/${repoName}` : ""
+const isStaticSubpathDeploy =
+  process.env.NEXT_PUBLIC_DEPLOY_TARGET === "github-pages" ||
+  process.env.GITHUB_ACTIONS === "true"
+const basePath = isStaticSubpathDeploy ? `/${repoName}` : ""
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
